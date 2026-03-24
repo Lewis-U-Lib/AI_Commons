@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Lewis University Library AI Commons — Resource Schema",
+  "description": "Metadata schema for resources in the Lewis University Library AI Commons. Each entry describes a single AI-assisted resource: an application, lesson plan, prompt library, policy document, assessment rubric, workflow, framework, or other resource.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "description",
+    "author",
+    "department",
+    "discipline",
+    "ai_tool",
+    "format",
+    "content_type",
+    "date_submitted",
+    "live_url",
+    "source_url",
+    "tags",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL-safe unique identifier matching the GitHub repo name. Lowercase alphanumeric and hyphens only.",
+      "examples": ["nursing-patient-sim", "bio-labsafety-prompts", "ai-responsible-use-policy"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100,
+      "description": "Human-readable resource title as it appears in the gallery."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 600,
+      "description": "A concise description of what the resource is and how it supports teaching, learning, research, or institutional operations. Aim for 2-4 sentences."
+    },
+    "author": {
+      "type": "string",
+      "description": "Name and optional title of the primary contributor."
+    },
+    "department": {
+      "type": "string",
+      "description": "Lewis University department or unit of the primary contributor.",
+      "examples": ["Nursing", "Chemistry", "Library", "Aviation", "English", "Business"]
+    },
+    "discipline": {
+      "type": "string",
+      "description": "Broad disciplinary category for filtering.",
+      "enum": [
+        "Nursing",
+        "Natural Sciences",
+        "Humanities",
+        "Social Sciences",
+        "Aviation & Transportation",
+        "Mathematics & Statistics",
+        "Computer Science & IT",
+        "Business",
+        "Education",
+        "Criminal Justice",
+        "Interdisciplinary"
+      ]
+    },
+    "ai_tool": {
+      "type": "string",
+      "description": "The primary generative AI tool(s) used to create the resource. For multi-tool workflows, use 'Multiple' and list tools in parentheses.",
+      "examples": ["Claude", "ChatGPT", "Cursor", "Replit", "Multiple (Claude, ElevenLabs, Midjourney)"]
+    },
+    "format": {
+      "type": "string",
+      "description": "The form or medium of the resource — what it IS, structurally.",
+      "enum": [
+        "Interactive Application",
+        "Lesson Plan",
+        "Prompt Library",
+        "Policy Document",
+        "Assessment Rubric",
+        "Workflow & Templates",
+        "Framework & Guide",
+        "Data Visualization",
+        "Video / Multimedia",
+        "Dataset",
+        "Syllabus Module",
+        "Other"
+      ]
+    },
+    "content_type": {
+      "type": "string",
+      "description": "The pedagogical or functional purpose of the resource — what it DOES.",
+      "enum": [
+        "Simulation",
+        "Visualization",
+        "Discussion Tool",
+        "Reference Tool",
+        "Interactive Lab",
+        "Decision Tool",
+        "Creation Tool",
+        "Analysis Tool",
+        "Quiz",
+        "Calculator",
+        "Game",
+        "Instructional Resource",
+        "Governance Framework",
+        "Production Guide",
+        "Faculty Development",
+        "Student Support",
+        "Other"
+      ]
+    },
+    "blooms_level": {
+      "type": "string",
+      "description": "Primary Bloom's Taxonomy level the resource targets. Optional for non-instructional resources.",
+      "enum": ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"]
+    },
+    "date_submitted": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the resource was submitted for review (YYYY-MM-DD)."
+    },
+    "live_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL where the resource is accessible. For applications, the deployed app. For documents, the hosted page or PDF."
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the source repository (typically GitHub)."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "description": "Lowercase hyphenated keywords for search and discovery."
+    },
+    "screenshot": {
+      "type": "string",
+      "description": "Relative path to a screenshot or preview image (PNG or WebP, 1200x800px recommended)."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "in-review", "published", "archived"],
+      "description": "Publication status. Only 'published' resources appear in the public gallery."
+    },
+    "additional_contributors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other people who contributed."
+    },
+    "course": {
+      "type": "string",
+      "description": "Course number/name if the resource was built for a specific course.",
+      "examples": ["NURS-410 Advanced Health Assessment", "ENGL-101 First-Year Composition"]
+    },
+    "license": {
+      "type": "string",
+      "default": "MIT",
+      "description": "License. Defaults to MIT for code, CC-BY-4.0 for documents.",
+      "examples": ["MIT", "CC-BY-4.0", "Apache-2.0"]
+    },
+    "ai_role": {
+      "type": "string",
+      "description": "Brief description of how AI was used in creating this resource. Helps other contributors understand the human-AI collaboration pattern.",
+      "examples": [
+        "Claude generated the full application code from a detailed prompt describing clinical scenarios.",
+        "ChatGPT drafted initial lesson plan structure; instructor revised extensively and added all discussion questions.",
+        "Claude wrote the policy framework; library team revised for institutional voice and legal compliance."
+      ]
+    }
+  },
+  "additionalProperties": false
+}

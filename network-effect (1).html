@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Network Effect &mdash; Lewis University Library AI Commons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#FDFAF5;--paper:#F7F2EB;--paperDk:#EDE7DD;--ink:#1E1E1E;--inkSoft:#4A4540;--inkMuted:#8C8580;--inkFaint:#B8B2AA;--wine:#940731;--wineLt:#B80D42;--winePale:rgba(148,7,49,.06);--terra:#C4654A;--terraPale:rgba(196,101,74,.06);--gold:#B8941F;--goldPale:rgba(184,148,31,.08);--white:#FFFFFF;--radius:8px;--radiusLg:14px}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);min-height:100vh;font-size:15px;line-height:1.6}
+a{color:var(--wine);text-decoration:none;transition:color .2s}a:hover{color:var(--terra)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='.5' fill='%23C8C0B4' fill-opacity='.25'/%3E%3C/svg%3E")}
+.topbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;background:linear-gradient(90deg,var(--wine),var(--terra),var(--gold),var(--terra),var(--wine))}
+.site-header{position:sticky;top:3px;z-index:100;background:rgba(253,250,245,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--paperDk);padding:.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+.site-brand{display:flex;align-items:center;gap:.85rem}
+.site-brand__icon{width:36px;height:36px;border-radius:50%;background:var(--wine);display:flex;align-items:center;justify-content:center;color:var(--cream);font-size:.9rem;font-weight:700;font-family:'Playfair Display',serif;box-shadow:0 2px 8px rgba(148,7,49,.2)}
+.site-brand__text{line-height:1.15}
+.site-brand__library{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine)}
+.site-brand__commons{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink)}
+.site-nav{display:flex;gap:1.75rem}
+.site-nav a{font-size:.82rem;font-weight:500;color:var(--inkMuted);letter-spacing:.3px}
+.site-nav a:hover{color:var(--ink)}
+.page-hero{padding:4rem 2.5rem 3rem;text-align:center;background:linear-gradient(180deg,var(--cream),var(--paper));border-bottom:1px solid var(--paperDk)}
+.page-hero .crumb{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine);margin-bottom:1rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ink);margin-bottom:.75rem}
+.page-hero__rule{width:50px;height:2px;margin:.75rem auto 1rem;background:linear-gradient(90deg,var(--wine),var(--terra));border:none}
+.page-hero p{max-width:640px;margin:0 auto;font-size:.95rem;line-height:1.75;color:var(--inkSoft)}
+.content{max-width:800px;margin:0 auto;padding:3rem 2.5rem}
+.back-link{display:inline-flex;align-items:center;gap:.3rem;font-size:.85rem;font-weight:600;color:var(--wine);margin-bottom:2rem}
+.back-link:hover{color:var(--terra)}
+.content h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:var(--ink);margin:2.5rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--paperDk)}
+.content h2:first-of-type{border-top:none;margin-top:0;padding-top:0}
+.content p{margin-bottom:1rem;font-size:.92rem;line-height:1.8;color:var(--inkSoft)}
+.content p strong{color:var(--ink);font-weight:600}
+.content .pullquote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--inkMuted);line-height:1.7;border-left:3px solid var(--terra);padding:1rem 0 1rem 1.5rem;margin:1.5rem 0}
+.mechanism{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusLg);padding:1.25rem 1.5rem;margin:1.25rem 0}
+.mechanism h3{font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;color:var(--wine);margin-bottom:.4rem}
+.mechanism p{margin-bottom:.5rem;font-size:.88rem}
+.mechanism p:last-child{margin-bottom:0}
+
+/* ═══ SOURCES ═══ */
+.sources{margin-top:2.5rem;padding-top:1.5rem;border-top:2px solid var(--paperDk)}
+.sources h2{border-top:none;padding-top:0;margin-top:0}
+.source-list{list-style:none;counter-reset:src}
+.source-list li{counter-increment:src;margin-bottom:1rem;padding-left:2rem;position:relative;font-size:.85rem;line-height:1.7;color:var(--inkSoft)}
+.source-list li::before{content:counter(src);position:absolute;left:0;top:.1rem;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--winePale);border:1px solid rgba(148,7,49,.15);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;color:var(--wine)}
+.source-list li strong{color:var(--ink);font-weight:600}
+.source-list li em{font-style:italic}
+.source-list li a{color:var(--wine);word-break:break-all}
+
+footer{text-align:center;padding:2rem 2.5rem;border-top:1px solid var(--paperDk);background:var(--paper);color:var(--inkMuted);font-size:.76rem;margin-top:2rem}
+footer a{color:var(--wine)}
+footer .lasallian{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:var(--inkMuted);margin-top:.4rem}
+@media(max-width:768px){.content{padding:2rem 1.25rem}.page-hero{padding:3rem 1.25rem 2rem}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<header class="site-header">
+  <a href="index.html" class="site-brand" style="text-decoration:none">
+    <div class="site-brand__icon">LU</div>
+    <div class="site-brand__text">
+      <div class="site-brand__library">Lewis University Library</div>
+      <div class="site-brand__commons">AI Commons</div>
+    </div>
+  </a>
+  <nav class="site-nav">
+    <a href="index.html">Browse</a>
+    <a href="about.html">About</a>
+    <a href="submit.html">Submissions</a>
+    <a href="https://lewisu.libanswers.com/chat/widget/9834cecf0f3b65300e275b111a06f48909feee517a3cfe2daedf5b9229fe58cc" target="_blank" rel="noopener">Ask Us</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="crumb">Lewis University Library &middot; AI Commons</div>
+  <h1>The Network Effect</h1>
+  <hr class="page-hero__rule">
+  <p>Why a shared, cross-campus collection of AI resources generates institutional culture&mdash;not just an archive. A research-grounded brief on the interdisciplinary benefits of AI resource commons in higher education.</p>
+</section>
+
+<div class="content">
+  <a href="index.html" class="back-link">&larr; Back to the Commons</a>
+
+  <h2>The Case for Shared AI Resource Collections</h2>
+  <p>The rapid adoption of artificial intelligence across higher education has created what researchers describe as a fundamental reconsideration of knowledge construction, academic authority, and educational purpose. AI is now being integrated into teaching, research, and institutional operations across virtually every discipline&mdash;but this integration typically happens in isolation, within individual departments or programs, with limited visibility across institutional boundaries.</p>
+  <p>A growing body of scholarship argues that the greatest benefits of AI in higher education emerge not from any single tool or application, but from the <strong>interdisciplinary connections</strong> that become possible when AI-related work is made visible across institutional silos. The AI Commons is designed to instantiate precisely this kind of network effect.</p>
+
+  <div class="pullquote">The interdisciplinary interest from scholars across linguistics, psychology, education, and neuroscience who connect AI to knowledge in their own disciplines creates both challenges and extraordinary opportunities for cross-pollination.</div>
+
+  <h2>What the Research Shows</h2>
+
+  <p>Several interconnected findings from the scholarly literature support the rationale behind a cross-campus AI commons:</p>
+
+  <div class="mechanism">
+    <h3>1. Interdisciplinarity Drives Innovation</h3>
+    <p>Research consistently demonstrates that interdisciplinary collaboration fosters innovation, facilitates creativity, and supports broader research impact. Newman (2024), studying faculty at a major research university, found that while material barriers impede cross-disciplinary work, the benefits of interdisciplinary collaboration&mdash;novel solutions, creative methodologies, and greater societal relevance&mdash;are widely acknowledged by both faculty and institutional leaders. The challenge is making interdisciplinary opportunities <strong>visible and accessible</strong>, which is precisely what a shared resource commons accomplishes.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>2. AI Tools Measurably Enhance Interdisciplinary Outcomes</h3>
+    <p>Zhang and Tang (2025), publishing in <em>Scientific Reports</em>, found a <strong>37% increase in interdisciplinary project outcomes</strong> when AI-generated content tools were strategically implemented across humanities, STEM, and social science programs. Their mixed-methods study across multiple institutions demonstrated that AI tools showed substantial value in breaking down disciplinary silos, with significant variations in effectiveness based on implementation approach. A shared commons helps faculty discover effective implementation patterns from other disciplines.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>3. AI Research Is Inherently Cross-Disciplinary</h3>
+    <p>Crompton and Burke (2023), in their systematic review published in the <em>International Journal of Educational Technology in Higher Education</em>, mapped the state of AI applications across all of higher education. They found that AI in education draws foundational contributions from computer science, management information systems, education, and psychology simultaneously. The implication is clear: AI resources created in one discipline carry transferable insights for many others. A commons makes these transfers discoverable rather than accidental.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>4. Cross-Disciplinary AI Resources Need Shared Infrastructure</h3>
+    <p>Kusters et al. (2020), writing in <em>Frontiers in Big Data</em>, analyzed the challenges and opportunities of interdisciplinary AI research and concluded that future development of AI should not only impact other scientific domains but should also take inspiration from them. They emphasize that combining AI with other fields requires overcoming communication barriers due to differences in terminologies, methods, and cultures&mdash;barriers that a curated, well-cataloged commons directly addresses by establishing shared vocabulary and discoverability.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>5. Institutional AI Policy Benefits from Transparency</h3>
+    <p>Farhi et al. (2025), in their analysis published in <em>PMC</em>, argue that GenAI requires proactive institutional strategies that balance innovation with integrity, calling for inclusive policies, ethical frameworks, and the development of critical AI literacies. When AI governance documents&mdash;from university-wide policies through college-level adaptations to department-specific protocols&mdash;are collected in a single discoverable location, governance becomes participatory rather than top-down. Faculty can see how policies cascade and can contribute to their evolution.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>6. Shared Resources Strengthen Pedagogical Innovation</h3>
+    <p>Podg&oacute;rska (2024), studying interdisciplinary collaboration for sustainable development in higher education, found that project-based learning across disciplinary teams is most effective when supported by shared resources and adequate institutional infrastructure. The same principle applies to AI integration: when faculty can see what colleagues in other programs have built, they are more likely to adapt and extend those approaches than to start from scratch. A commons dramatically reduces the activation energy for pedagogical innovation.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>7. The Teaching Square Effect: Professional Networks Form Around Shared Visibility</h3>
+    <p>Jackson et al. (2024), studying interdisciplinary teaching squares across nursing, pharmacy, and biomedical science at an Australian university, found that one of the most significant unexpected outcomes was the formation of interdisciplinary professional relationships and networks. When academics could see their peers' teaching practices across disciplinary boundaries, new collaborations emerged organically. A digital commons operates on the same principle at institutional scale&mdash;making pedagogical practice visible creates professional community.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>8. AI Facilitates Cross-Disciplinary Knowledge Transfer</h3>
+    <p>Drago et al. (2023), surveying Romanian academics across five universities for <em>Societies</em>, found that AI offers exceptional opportunities to increase interdisciplinary, multidisciplinary, and transdisciplinary research by facilitating searching across sources, transferring methods between fields, and mixing research methodologies. A commons of AI-generated resources embodies this principle: a prompt library created for biology can inspire parallel resources in chemistry, nursing, or aviation.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>9. Students Benefit from Seeing AI Used Across the Institution</h3>
+    <p>Zawacki-Richter et al. (2019), in their widely-cited systematic review in the <em>International Journal of Educational Technology in Higher Education</em>, highlighted a critical gap: educators are underrepresented in the AI-in-education literature relative to technologists. A cross-campus AI commons recenters faculty expertise by showcasing <strong>how educators use AI</strong> rather than focusing solely on the tools themselves. When students can see AI being used responsibly across nursing, philosophy, aviation, and criminal justice, the commons becomes a living syllabus of institutional AI literacy.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>10. Shared Collections Create Institutional Memory</h3>
+    <p>The UNESCO <em>Guidance for Generative Artificial Intelligence in Education and Research</em> (2024) and the UNESCO <em>Recommendation on Open Science</em> (2021) both emphasize the importance of making research processes and outcomes transparent, accessible, and reusable across fields. Faculty leave. Grants expire. Semesters turn over. A curated commons preserves the intellectual labor, the pedagogical experiments, and the governance evolution so that institutional knowledge persists beyond any single individual's tenure.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>11. The Interdisciplinary Competency Gap Demands Institutional Response</h3>
+    <p>Oudenampsen et al. (2024), conducting a systematic review of interdisciplinary learning outcomes in higher education for <em>The Review of Higher Education</em>, found that while the evidence for interdisciplinary learning benefits is growing, institutions still lack systematic approaches to making interdisciplinary resources and outcomes visible. A commons is one such systematic approach&mdash;it doesn't just store resources, it makes the <strong>connections between them</strong> discoverable.</p>
+  </div>
+
+  <div class="mechanism">
+    <h3>12. Open Resources Accelerate Responsible AI Adoption</h3>
+    <p>G&oacute;mez-Puente et al. (2024), studying AI in higher education through a systematic literature review in <em>Frontiers in Education</em>, found that AI's transformative potential is evident across multiple disciplines but that its responsible adoption requires shared frameworks, ethical guidelines, and collaborative approaches. An openly-licensed commons of AI resources&mdash;from governance documents to classroom applications&mdash;provides exactly this shared infrastructure, enabling institutions to move from ad hoc AI experimentation to coordinated, responsible integration.</p>
+  </div>
+
+  <h2>The Network Effect at Lewis</h2>
+  <p>The mechanisms described above converge in the AI Commons. When a nursing simulation is visible to a physics professor, lateral inspiration becomes possible. When a university AI policy is discoverable alongside its college-level adaptations and department-specific protocols, governance transparency becomes real. When interdisciplinary resources are tagged across every discipline they touch, the boundaries between programs become bridges.</p>
+  <p>This is not a repository. It is a <strong>culture</strong>&mdash;one that reflects the Lasallian tradition of education through association, made possible by the affordances of open digital infrastructure and the cross-disciplinary reach of artificial intelligence.</p>
+
+  <!-- ═══ SOURCES ═══ -->
+  <div class="sources">
+    <h2>Sources</h2>
+    <ol class="source-list">
+      <li><strong>Newman, J.</strong> (2024). Incentivising interdisciplinary research collaboration: Evidence from Australia. <em>Journal of Higher Education Policy and Management, 46</em>(2), 146&ndash;165. <a href="https://doi.org/10.1080/1360080X.2023.2267719" target="_blank" rel="noopener">doi.org/10.1080/1360080X.2023.2267719</a></li>
+      <li><strong>Zhang, Y. &amp; Tang, Q.</strong> (2025). Integrating AI-generated content tools in higher education: A comparative analysis of interdisciplinary learning outcomes. <em>Scientific Reports, 15</em>. <a href="https://doi.org/10.1038/s41598-025-10941-y" target="_blank" rel="noopener">doi.org/10.1038/s41598-025-10941-y</a></li>
+      <li><strong>Crompton, H. &amp; Burke, D.</strong> (2023). Artificial intelligence in higher education: The state of the field. <em>International Journal of Educational Technology in Higher Education, 20</em>(22). <a href="https://doi.org/10.1186/s41239-023-00392-8" target="_blank" rel="noopener">doi.org/10.1186/s41239-023-00392-8</a></li>
+      <li><strong>Kusters, R., Misevic, D., Berry, H., et al.</strong> (2020). Interdisciplinary research in artificial intelligence: Challenges and opportunities. <em>Frontiers in Big Data, 3</em>, 577974. <a href="https://doi.org/10.3389/fdata.2020.577974" target="_blank" rel="noopener">doi.org/10.3389/fdata.2020.577974</a></li>
+      <li><strong>Farhi, F., et al.</strong> (2025). The quiet transformation of higher education in the AI era. <em>PMC</em>. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12438950/" target="_blank" rel="noopener">pmc.ncbi.nlm.nih.gov/articles/PMC12438950</a></li>
+      <li><strong>Podg&oacute;rska, M.</strong> (2024). Interdisciplinary collaboration in higher education towards sustainable development. <em>Sustainable Development, 32</em>(3), 2085&ndash;2103. <a href="https://doi.org/10.1002/sd.2765" target="_blank" rel="noopener">doi.org/10.1002/sd.2765</a></li>
+      <li><strong>Jackson, D., et al.</strong> (2024). Interdisciplinary teaching squares enhance reflection and collegiality: A collaborative pedagogical approach. <em>Nurse Education in Practice</em>. <a href="https://doi.org/10.1016/j.nepr.2024.104109" target="_blank" rel="noopener">doi.org/10.1016/j.nepr.2024.104109</a></li>
+      <li><strong>Drago, I., et al.</strong> (2023). Implementing artificial intelligence in higher education: Pros and cons from the perspectives of academics. <em>Societies, 13</em>(5), 118. <a href="https://doi.org/10.3390/soc13050118" target="_blank" rel="noopener">doi.org/10.3390/soc13050118</a></li>
+      <li><strong>Zawacki-Richter, O., Mar&iacute;n, V. I., Bond, M., &amp; Gouverneur, F.</strong> (2019). Systematic review of research on artificial intelligence applications in higher education &mdash; where are the educators? <em>International Journal of Educational Technology in Higher Education, 16</em>(39). <a href="https://doi.org/10.1186/s41239-019-0171-0" target="_blank" rel="noopener">doi.org/10.1186/s41239-019-0171-0</a></li>
+      <li><strong>UNESCO.</strong> (2024). <em>Guidance for generative artificial intelligence in education and research</em>. Paris: UNESCO. <a href="https://www.unesco.org/en/digital-education/ai" target="_blank" rel="noopener">unesco.org/en/digital-education/ai</a></li>
+      <li><strong>UNESCO.</strong> (2021). <em>UNESCO Recommendation on Open Science</em>. Paris: UNESCO. <a href="https://www.unesco.org/en/open-science" target="_blank" rel="noopener">unesco.org/en/open-science</a></li>
+      <li><strong>Oudenampsen, J., Das, E., Blijlevens, N., &amp; van de Pol, M.</strong> (2024). The state of the empirical evidence for interdisciplinary learning outcomes in higher education: A systematic review. <em>The Review of Higher Education</em>. <a href="https://doi.org/10.1353/rhe.0.a920416" target="_blank" rel="noopener">doi.org/10.1353/rhe.0.a920416</a></li>
+      <li><strong>G&oacute;mez-Puente, S. M., Montoya, M. A., &amp; Vite-Le&oacute;n, V. O.</strong> (2024). AI in higher education: A systematic literature review. <em>Frontiers in Education, 9</em>. <a href="https://doi.org/10.3389/feduc.2024.1391485" target="_blank" rel="noopener">doi.org/10.3389/feduc.2024.1391485</a></li>
+    </ol>
+  </div>
+</div>
+
+<footer>
+  <p><a href="https://lewisuniversity.libguides.com" target="_blank" rel="noopener">Lewis University Library</a> &middot; AI Commons</p>
+  <p class="lasallian">In the Lasallian tradition of innovation in teaching and learning: together and by association.</p>
+  <p style="margin-top:.5rem">&copy; 2026 Lewis University Library. Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</p>
+</footer>
+</body>
+</html>

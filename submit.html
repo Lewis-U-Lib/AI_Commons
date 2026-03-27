@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a Resource &mdash; Lewis University Library AI Commons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#FDFAF5;--paper:#F7F2EB;--paperDk:#EDE7DD;--ink:#1E1E1E;--inkSoft:#4A4540;--inkMuted:#8C8580;--inkFaint:#B8B2AA;--wine:#940731;--wineLt:#B80D42;--winePale:rgba(148,7,49,.06);--terra:#C4654A;--terraPale:rgba(196,101,74,.06);--gold:#B8941F;--goldPale:rgba(184,148,31,.08);--white:#FFFFFF;--radius:8px;--radiusSm:5px;--radiusLg:14px;--green:#16a34a;--greenPale:rgba(22,163,74,.06)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);min-height:100vh;font-size:15px;line-height:1.6}
+a{color:var(--wine);text-decoration:none;transition:color .2s}a:hover{color:var(--terra)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='.5' fill='%23C8C0B4' fill-opacity='.25'/%3E%3C/svg%3E")}
+.topbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;background:linear-gradient(90deg,var(--wine),var(--terra),var(--gold),var(--terra),var(--wine))}
+.site-header{position:sticky;top:3px;z-index:100;background:rgba(253,250,245,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--paperDk);padding:.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+.site-brand{display:flex;align-items:center;gap:.85rem;text-decoration:none}
+.site-brand__icon{width:36px;height:36px;border-radius:50%;background:var(--wine);display:flex;align-items:center;justify-content:center;color:var(--cream);font-size:.9rem;font-weight:700;font-family:'Playfair Display',serif;box-shadow:0 2px 8px rgba(148,7,49,.2)}
+.site-brand__text{line-height:1.15}
+.site-brand__library{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine)}
+.site-brand__commons{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink)}
+.site-nav{display:flex;gap:1.75rem}
+.site-nav a{font-size:.82rem;font-weight:500;color:var(--inkMuted);letter-spacing:.3px}
+.site-nav a:hover{color:var(--ink)}
+.page-hero{padding:4rem 2.5rem 3rem;text-align:center;background:linear-gradient(180deg,var(--cream),var(--paper));border-bottom:1px solid var(--paperDk)}
+.page-hero .crumb{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine);margin-bottom:1rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ink);margin-bottom:.75rem}
+.page-hero__rule{width:50px;height:2px;margin:.75rem auto 1rem;background:linear-gradient(90deg,var(--wine),var(--terra));border:none}
+.page-hero p{max-width:620px;margin:0 auto;font-size:.95rem;line-height:1.75;color:var(--inkSoft)}
+.content{max-width:720px;margin:0 auto;padding:3rem 2.5rem}
+.back-link{display:inline-flex;align-items:center;gap:.3rem;font-size:.85rem;font-weight:600;color:var(--wine);margin-bottom:2rem}
+.back-link:hover{color:var(--terra)}
+
+/* ═══ FORM ═══ */
+.form-section{margin-bottom:2rem}
+.form-section h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:var(--ink);margin-bottom:.25rem}
+.form-section .section-desc{font-size:.82rem;color:var(--inkMuted);margin-bottom:1rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:.3rem}
+.field label .req{color:var(--wine);margin-left:2px}
+.field .hint{font-size:.72rem;color:var(--inkMuted);margin-top:.2rem}
+.field input[type="text"],.field input[type="email"],.field input[type="url"],.field textarea,.field select{
+  width:100%;background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusSm);
+  padding:.6rem .85rem;color:var(--ink);font-size:.88rem;font-family:'DM Sans',sans-serif;
+  transition:border-color .2s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 3px var(--winePale)}
+.field textarea{min-height:100px;resize:vertical}
+.field select{cursor:pointer}
+.field input::placeholder,.field textarea::placeholder{color:var(--inkFaint)}
+
+/* checkbox group */
+.check-group{display:flex;flex-wrap:wrap;gap:.5rem}
+.check-group label{
+  display:flex;align-items:center;gap:.35rem;font-size:.8rem;font-weight:500;color:var(--inkSoft);
+  background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusSm);
+  padding:.35rem .7rem;cursor:pointer;transition:all .2s;
+}
+.check-group label:hover{border-color:var(--wine);color:var(--wine)}
+.check-group input[type="checkbox"]{accent-color:var(--wine);width:14px;height:14px}
+
+/* file upload */
+.file-zone{
+  border:2px dashed var(--paperDk);border-radius:var(--radiusLg);padding:2rem;text-align:center;
+  background:var(--white);cursor:pointer;transition:all .25s;position:relative;
+}
+.file-zone:hover{border-color:var(--wine);background:var(--winePale)}
+.file-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file-zone .fz-icon{font-size:1.8rem;margin-bottom:.4rem}
+.file-zone .fz-label{font-size:.88rem;font-weight:600;color:var(--ink)}
+.file-zone .fz-hint{font-size:.72rem;color:var(--inkMuted);margin-top:.2rem}
+.file-list{margin-top:.5rem;font-size:.78rem;color:var(--inkSoft)}
+
+/* row */
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+
+/* submit */
+.submit-row{display:flex;align-items:center;gap:1rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--paperDk)}
+.btn-submit{
+  padding:.7rem 2rem;border:none;border-radius:var(--radiusSm);
+  background:var(--wine);color:var(--cream);font-family:'DM Sans',sans-serif;
+  font-size:.88rem;font-weight:700;cursor:pointer;transition:all .2s;
+  letter-spacing:.3px;
+}
+.btn-submit:hover{background:var(--wineLt)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.submit-note{font-size:.78rem;color:var(--inkMuted);flex:1}
+
+/* success */
+.success-msg{
+  display:none;background:var(--greenPale);border:1px solid rgba(22,163,74,.2);
+  border-radius:var(--radiusLg);padding:2rem;text-align:center;margin-top:1.5rem;
+}
+.success-msg.show{display:block}
+.success-msg h3{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;color:var(--green);margin-bottom:.5rem}
+.success-msg p{font-size:.88rem;color:var(--inkSoft)}
+
+/* eligibility */
+.eligibility{background:var(--white);border:1px solid var(--paperDk);border-left:3px solid var(--wine);border-radius:0 var(--radius) var(--radius) 0;padding:1rem 1.25rem;margin-bottom:2rem}
+.eligibility h3{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.85rem;color:var(--ink);margin-bottom:.4rem}
+.eligibility p{font-size:.82rem;color:var(--inkSoft);line-height:1.65;margin:0}
+
+footer{text-align:center;padding:2rem 2.5rem;border-top:1px solid var(--paperDk);background:var(--paper);color:var(--inkMuted);font-size:.76rem;margin-top:2rem}
+footer a{color:var(--wine)}
+footer .lasallian{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:var(--inkMuted);margin-top:.4rem}
+@media(max-width:768px){.content{padding:2rem 1.25rem}.page-hero{padding:3rem 1.25rem 2rem}.field-row{grid-template-columns:1fr}.site-header{padding:.5rem 1rem}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<header class="site-header">
+  <a href="index.html" class="site-brand">
+    <div class="site-brand__icon">LU</div>
+    <div class="site-brand__text">
+      <div class="site-brand__library">Lewis University Library</div>
+      <div class="site-brand__commons">AI Commons</div>
+    </div>
+  </a>
+  <nav class="site-nav">
+    <a href="index.html">Browse</a>
+    <a href="about.html">About</a>
+    <a href="submit.html">Submissions</a>
+    <a href="https://lewisu.libanswers.com/chat/widget/9834cecf0f3b65300e275b111a06f48909feee517a3cfe2daedf5b9229fe58cc" target="_blank" rel="noopener">Ask Us</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="crumb">Lewis University Library</div>
+  <h1>Submit a Resource</h1>
+  <hr class="page-hero__rule">
+  <p>Share your AI-related or AI-generated work with the Lewis University community. The Library team will review, catalog, and publish your submission to the AI Commons.</p>
+</section>
+
+<div class="content">
+  <a href="index.html" class="back-link">&larr; Back to the Commons</a>
+
+  <div class="eligibility">
+    <h3>What belongs in the Commons?</h3>
+    <p>Any resource where <strong>a person with domain expertise used AI as a collaborator to make something useful</strong> for teaching, learning, research, or university operations. Interactive applications, lesson plans, prompt libraries, assessment rubrics, governance documents, AI policies, workflows, frameworks, and more. There's no minimum technical complexity&mdash;a well-crafted prompt library is as valuable as a full interactive application.</p>
+  </div>
+
+  <form id="submission-form">
+    <!-- ═══ ABOUT YOU ═══ -->
+    <div class="form-section">
+      <h2>About You</h2>
+      <div class="section-desc">Tell us who you are so we can attribute your contribution and follow up if needed.</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" name="name" required placeholder="Dr. Jane Smith">
+        </div>
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="email" required placeholder="jsmith@lewisu.edu">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Department / Unit <span class="req">*</span></label>
+          <input type="text" name="department" required placeholder="e.g., Biology Department">
+        </div>
+        <div class="field">
+          <label>College</label>
+          <select name="college">
+            <option value="">Select a college...</option>
+            <option>College of Aviation, Science & Technology</option>
+            <option>College of Business</option>
+            <option>College of Education & Social Sciences</option>
+            <option>College of Humanities, Fine Arts & Communications</option>
+            <option>College of Nursing & Health Sciences</option>
+            <option>Library</option>
+            <option>University Administration</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ABOUT THE RESOURCE ═══ -->
+    <div class="form-section">
+      <h2>About the Resource</h2>
+      <div class="section-desc">Describe what you've built and how AI was involved.</div>
+
+      <div class="field">
+        <label>Resource Title <span class="req">*</span></label>
+        <input type="text" name="title" required placeholder="e.g., Clinical Documentation AI Tutor">
+      </div>
+      <div class="field">
+        <label>Description <span class="req">*</span></label>
+        <textarea name="description" required placeholder="2&ndash;4 sentences describing what the resource is, who it's for, and what it does."></textarea>
+        <div class="hint">This will appear on the resource card in the Commons gallery.</div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Category <span class="req">*</span></label>
+          <select name="category" required>
+            <option value="">Select a category...</option>
+            <option>Interactive Application</option>
+            <option>Lesson Plan</option>
+            <option>Prompt Library</option>
+            <option>Assessment Rubric</option>
+            <option>Framework & Guide</option>
+            <option>Workflow & Template</option>
+            <option>Teaching Resource</option>
+            <option>University AI Policy</option>
+            <option>College AI Policy</option>
+            <option>Department AI Policy</option>
+            <option>Interdisciplinary Project</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Scope</label>
+          <select name="scope">
+            <option value="">Select scope...</option>
+            <option>University-Wide</option>
+            <option>College-Level</option>
+            <option>Department-Level</option>
+            <option>Interdisciplinary</option>
+            <option>Library</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Discipline(s) <span class="req">*</span></label>
+        <input type="text" name="disciplines" required placeholder="e.g., Nursing, Biology, Philosophy (comma-separated)">
+        <div class="hint">If this resource spans multiple disciplines, list all that apply. It will appear in all of them.</div>
+      </div>
+    </div>
+
+    <!-- ═══ AI DETAILS ═══ -->
+    <div class="form-section">
+      <h2>AI Involvement</h2>
+      <div class="section-desc">Transparency about how AI was used is core to the Commons' value.</div>
+
+      <div class="field">
+        <label>AI Tool(s) Used <span class="req">*</span></label>
+        <div class="check-group">
+          <label><input type="checkbox" name="tools" value="Claude"> Claude</label>
+          <label><input type="checkbox" name="tools" value="ChatGPT"> ChatGPT</label>
+          <label><input type="checkbox" name="tools" value="GitHub Copilot"> GitHub Copilot</label>
+          <label><input type="checkbox" name="tools" value="Gemini"> Gemini</label>
+          <label><input type="checkbox" name="tools" value="Kling AI"> Kling AI</label>
+          <label><input type="checkbox" name="tools" value="DALL-E"> DALL-E</label>
+          <label><input type="checkbox" name="tools" value="Grammarly AI"> Grammarly AI</label>
+          <label><input type="checkbox" name="tools" value="Other"> Other</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Other AI Tool(s)</label>
+        <input type="text" name="tools_other" placeholder="If you selected Other, specify here">
+      </div>
+      <div class="field">
+        <label>How was AI used? <span class="req">*</span></label>
+        <textarea name="ai_role" required placeholder="Briefly describe what the AI did vs. what you did. e.g., 'Claude generated the initial JavaScript code and patient scenarios; I reviewed all clinical content for accuracy, rewrote dialogue, and designed the assessment rubric.'"></textarea>
+        <div class="hint">This helps others understand the human&ndash;AI collaboration pattern.</div>
+      </div>
+    </div>
+
+    <!-- ═══ FILES & LINKS ═══ -->
+    <div class="form-section">
+      <h2>Files &amp; Links</h2>
+      <div class="section-desc">Upload your resource files and/or provide links to an existing deployment.</div>
+
+      <div class="field">
+        <label>Live URL</label>
+        <input type="url" name="live_url" placeholder="https://... (if already deployed somewhere)">
+        <div class="hint">If your resource is already hosted (GitHub Pages, personal site, etc.), provide the URL.</div>
+      </div>
+      <div class="field">
+        <label>Source Repository URL</label>
+        <input type="url" name="source_url" placeholder="https://github.com/... (if applicable)">
+      </div>
+      <div class="field">
+        <label>Upload Files</label>
+        <div class="file-zone" id="file-zone">
+          <input type="file" name="files" id="file-input" multiple>
+          <div class="fz-icon">📁</div>
+          <div class="fz-label">Drag files here or click to browse</div>
+          <div class="fz-hint">HTML, CSS, JS, PDF, DOCX, MD, images, or ZIP &mdash; up to 50MB total</div>
+        </div>
+        <div class="file-list" id="file-list"></div>
+        <div class="hint">If your resource is multiple files, a ZIP archive is preferred.</div>
+      </div>
+    </div>
+
+    <!-- ═══ OPTIONAL ═══ -->
+    <div class="form-section">
+      <h2>Optional Details</h2>
+      <div class="section-desc">These help with discoverability but aren't required.</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Bloom's Taxonomy Level</label>
+          <select name="blooms">
+            <option value="">Select level...</option>
+            <option>Remember</option>
+            <option>Understand</option>
+            <option>Apply</option>
+            <option>Analyze</option>
+            <option>Evaluate</option>
+            <option>Create</option>
+            <option>Multiple Levels</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Is this interdisciplinary?</label>
+          <select name="interdisciplinary">
+            <option value="">Select...</option>
+            <option value="yes">Yes &mdash; spans multiple disciplines</option>
+            <option value="no">No &mdash; primarily one discipline</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Tags</label>
+        <input type="text" name="tags" placeholder="e.g., simulation, SOAP notes, clinical, feedback (comma-separated)">
+        <div class="hint">3&ndash;8 keyword tags help people find your resource through search.</div>
+      </div>
+      <div class="field">
+        <label>Anything else?</label>
+        <textarea name="notes" placeholder="Any additional context, special instructions, or questions for the Library team."></textarea>
+      </div>
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit" id="submit-btn">Submit Resource</button>
+      <div class="submit-note">The Library team will review your submission and follow up via email, usually within 5 business days. Upon approval, your resource will be cataloged and published to the Commons.</div>
+    </div>
+  </form>
+
+  <div class="success-msg" id="success-msg">
+    <h3>Submission Received!</h3>
+    <p>Thank you for contributing to the AI Commons. The Library team will review your resource and follow up at the email address you provided, typically within 5 business days.</p>
+    <p style="margin-top:.75rem"><a href="index.html">&larr; Back to the Commons</a></p>
+  </div>
+</div>
+
+<footer>
+  <p><a href="https://lewisuniversity.libguides.com" target="_blank" rel="noopener">Lewis University Library</a> &middot; AI Commons</p>
+  <p class="lasallian">In the Lasallian tradition of innovation in teaching and learning: together and by association.</p>
+  <p style="margin-top:.5rem">&copy; 2026 Lewis University Library. Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</p>
+</footer>
+
+<script>
+/* file list display */
+document.getElementById('file-input').addEventListener('change', function() {
+  var list = document.getElementById('file-list');
+  if (this.files.length === 0) { list.textContent = ''; return; }
+  var names = [];
+  for (var i = 0; i < this.files.length; i++) names.push(this.files[i].name);
+  list.textContent = 'Selected: ' + names.join(', ');
+});
+
+/* form submit — show success (replace with real endpoint when ready) */
+document.getElementById('submission-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  /* In production, wire this to a LibWizard form, Google Form, or server endpoint.
+     For now, show the success message as a demo. */
+  this.style.display = 'none';
+  document.querySelector('.eligibility').style.display = 'none';
+  document.getElementById('success-msg').classList.add('show');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
+</script>
+</body>
+</html>

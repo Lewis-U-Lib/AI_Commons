@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About &mdash; Lewis University Library AI Commons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#FDFAF5;--paper:#F7F2EB;--paperDk:#EDE7DD;--ink:#1E1E1E;--inkSoft:#4A4540;--inkMuted:#8C8580;--inkFaint:#B8B2AA;--wine:#940731;--wineLt:#B80D42;--winePale:rgba(148,7,49,.06);--terra:#C4654A;--terraLt:#D8806A;--terraPale:rgba(196,101,74,.06);--gold:#B8941F;--goldPale:rgba(184,148,31,.08);--white:#FFFFFF;--radius:8px;--radiusLg:14px}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);min-height:100vh;font-size:15px;line-height:1.6}
+a{color:var(--wine);text-decoration:none;transition:color .2s}a:hover{color:var(--terra)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='.5' fill='%23C8C0B4' fill-opacity='.25'/%3E%3C/svg%3E")}
+.topbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;background:linear-gradient(90deg,var(--wine),var(--terra),var(--gold),var(--terra),var(--wine))}
+.site-header{position:sticky;top:3px;z-index:100;background:rgba(253,250,245,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--paperDk);padding:.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+.site-brand{display:flex;align-items:center;gap:.85rem}
+.site-brand__icon{width:36px;height:36px;border-radius:50%;background:var(--wine);display:flex;align-items:center;justify-content:center;color:var(--cream);font-size:.9rem;font-weight:700;font-family:'Playfair Display',serif;box-shadow:0 2px 8px rgba(148,7,49,.2)}
+.site-brand__text{line-height:1.15}
+.site-brand__library{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine)}
+.site-brand__commons{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink)}
+.site-nav{display:flex;gap:1.75rem}
+.site-nav a{font-size:.82rem;font-weight:500;color:var(--inkMuted);letter-spacing:.3px}
+.site-nav a:hover{color:var(--ink)}
+.page-hero{padding:4rem 2.5rem 3rem;text-align:center;background:linear-gradient(180deg,var(--cream),var(--paper));border-bottom:1px solid var(--paperDk)}
+.page-hero .crumb{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine);margin-bottom:1rem}
+.page-hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ink);margin-bottom:.75rem}
+.page-hero__rule{width:50px;height:2px;margin:.75rem auto 1rem;background:linear-gradient(90deg,var(--wine),var(--terra));border:none}
+.page-hero p{max-width:620px;margin:0 auto;font-size:.95rem;line-height:1.75;color:var(--inkSoft)}
+.content{max-width:800px;margin:0 auto;padding:3rem 2.5rem}
+.content h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.35rem;color:var(--ink);margin:2.5rem 0 .75rem;padding-top:1rem;border-top:1px solid var(--paperDk)}
+.content h2:first-of-type{border-top:none;margin-top:0;padding-top:0}
+.content p{margin-bottom:1rem;font-size:.92rem;line-height:1.8;color:var(--inkSoft)}
+.content p strong{color:var(--ink);font-weight:600}
+.content .highlight-box{background:var(--white);border:1px solid var(--paperDk);border-left:3px solid var(--wine);border-radius:0 var(--radius) var(--radius) 0;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.content .highlight-box p{margin-bottom:.5rem}
+.content .highlight-box p:last-child{margin-bottom:0}
+.contrib-paths{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0}
+.contrib-path{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusLg);padding:1.25rem}
+.contrib-path h3{font-family:'Playfair Display',serif;font-weight:600;font-size:.95rem;color:var(--wine);margin-bottom:.5rem}
+.contrib-path p{font-size:.85rem;color:var(--inkSoft);line-height:1.65;margin-bottom:0}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin:1.5rem 0}
+.value-card{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radius);padding:1rem;text-align:center}
+.value-card .icon{font-size:1.5rem;margin-bottom:.4rem}
+.value-card h4{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.82rem;color:var(--ink);margin-bottom:.3rem}
+.value-card p{font-size:.78rem;color:var(--inkMuted);line-height:1.5;margin:0}
+.back-link{display:inline-flex;align-items:center;gap:.3rem;font-size:.85rem;font-weight:600;color:var(--wine);margin-bottom:2rem}
+.back-link:hover{color:var(--terra)}
+footer{text-align:center;padding:2rem 2.5rem;border-top:1px solid var(--paperDk);background:var(--paper);color:var(--inkMuted);font-size:.76rem;margin-top:2rem}
+footer a{color:var(--wine)}
+footer .lasallian{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:var(--inkMuted);margin-top:.4rem}
+@media(max-width:768px){.contrib-paths{grid-template-columns:1fr}.content{padding:2rem 1.25rem}.page-hero{padding:3rem 1.25rem 2rem}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<header class="site-header">
+  <a href="index.html" class="site-brand" style="text-decoration:none">
+    <div class="site-brand__icon">LU</div>
+    <div class="site-brand__text">
+      <div class="site-brand__library">Lewis University Library</div>
+      <div class="site-brand__commons">AI Commons</div>
+    </div>
+  </a>
+  <nav class="site-nav">
+    <a href="index.html">Browse</a>
+    <a href="network-effect.html">Network Effect</a>
+    <a href="submit.html">Submissions</a>
+    <a href="https://lewisu.libanswers.com/chat/widget/9834cecf0f3b65300e275b111a06f48909feee517a3cfe2daedf5b9229fe58cc" target="_blank" rel="noopener">Ask Us</a>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="crumb">Lewis University Library</div>
+  <h1>About the AI Commons</h1>
+  <hr class="page-hero__rule">
+  <p>A curated, cross-campus collection of everything AI-related and AI-generated at Lewis University&mdash;built by the community, for the community, in the open.</p>
+</section>
+
+<div class="content">
+  <a href="index.html" class="back-link">&larr; Back to the Commons</a>
+
+  <h2>What Is the AI Commons?</h2>
+  <p>The Lewis University Library AI Commons is a living gallery of AI-related and AI-generated resources from across the entire university. It includes interactive applications, lesson plans, prompt libraries, assessment rubrics, governance documents, college-specific and departmental AI policies, interdisciplinary teaching resources, production workflows, frameworks, and anything else that demonstrates how Lewis University is engaging with artificial intelligence&mdash;thoughtfully, transparently, and collaboratively.</p>
+  <p>Every resource in the Commons has been <strong>created with generative AI and shaped by human expertise</strong>. The collection is curated by Lewis University Library, openly licensed, and freely available for use, adaptation, and inspiration.</p>
+
+  <h2>Why Does This Exist?</h2>
+  <p>AI integration is happening across every discipline, office, and college at Lewis. But too often, this work happens in isolation&mdash;a nursing professor builds a clinical simulation, a philosophy faculty member develops an ethics module, a business department drafts an AI use policy&mdash;and none of them know what the others have done.</p>
+  <p>The AI Commons makes that work <strong>visible, discoverable, and reusable</strong>. When a biology lab safety prompt library is findable alongside an aviation NOTAM decoder, new patterns emerge. When university-wide AI governance documents live alongside department-level adaptations, the full policy landscape becomes navigable. When interdisciplinary resources are tagged across every discipline they touch, the boundaries between programs become bridges.</p>
+
+  <div class="highlight-box">
+    <p><strong>The organizing principle:</strong> not silos, but resonance. Resources live in every disciplinary home they belong to. An AI Ethics module tagged across seven disciplines shows up when a nursing faculty member browses nursing resources <em>and</em> when a philosophy professor browses philosophy resources. The Commons reflects how knowledge actually works&mdash;by crossing boundaries.</p>
+  </div>
+
+  <h2>Who Can Contribute?</h2>
+  <p>Any member of the Lewis University community&mdash;faculty, librarians, staff, and administrators. Whether you've built an AI-assisted application, drafted a departmental AI policy, designed a lesson plan that integrates generative AI, developed a governance framework, or created a workflow for AI-augmented research, it belongs here.</p>
+  <p>We provide two paths for contribution:</p>
+
+  <div class="contrib-paths">
+    <div class="contrib-path">
+      <h3>Simple Submission</h3>
+      <p>Fill out a brief form describing your resource, upload any relevant files, and the Library team will catalog, format, and publish it to the Commons on your behalf. No technical knowledge required.</p>
+    </div>
+    <div class="contrib-path">
+      <h3>GitHub Workflow</h3>
+      <p>For contributors comfortable with code: fork the repository, add your resource following the template, and open a pull request. Your submission will be reviewed and merged by the Library team.</p>
+    </div>
+  </div>
+
+  <h2>What Makes a Good Contribution?</h2>
+  <p>The Commons welcomes any resource where <strong>a person with domain expertise used AI as a collaborator to make something useful</strong>. There is no minimum technical complexity&mdash;a well-crafted prompt library is as valuable as a full interactive application. What we look for is intentionality, transparency about how AI was used, and relevance to teaching, learning, research, or university operations.</p>
+  <p>Every submission is reviewed by the Library team for quality, accuracy, appropriate licensing, and alignment with Lewis University's responsible AI use commitments.</p>
+
+  <h2>Our Values</h2>
+  <div class="values-grid">
+    <div class="value-card"><div class="icon">🔍</div><h4>Transparency</h4><p>Every resource documents how AI was used in its creation.</p></div>
+    <div class="value-card"><div class="icon">🌐</div><h4>Interdisciplinarity</h4><p>Resources live in every disciplinary home they belong to.</p></div>
+    <div class="value-card"><div class="icon">🤝</div><h4>Collaboration</h4><p>Built by association, in the Lasallian tradition.</p></div>
+    <div class="value-card"><div class="icon">📖</div><h4>Openness</h4><p>Everything is openly licensed under CC BY-NC-SA 4.0.</p></div>
+    <div class="value-card"><div class="icon">🏛️</div><h4>Governance</h4><p>Policies and frameworks are discoverable, not buried.</p></div>
+    <div class="value-card"><div class="icon">💡</div><h4>Reusability</h4><p>Every resource is meant to be adapted, not just admired.</p></div>
+  </div>
+
+  <h2>Governance &amp; Curation</h2>
+  <p>The AI Commons is maintained by <strong>Lewis University Library</strong> in collaboration with the AI Governance Committee and contributing faculty across all colleges. The Library serves as curator, ensuring consistent metadata, quality standards, appropriate licensing, and alignment with institutional AI policies.</p>
+  <p>The Commons also serves a governance function: by collecting university-wide, college-level, and department-specific AI policies in one discoverable location, it creates transparency across the full institutional policy landscape. Faculty, staff, and administrators can see how AI governance cascades from institutional mandate through college adaptation to classroom practice.</p>
+
+  <h2>Technical Details</h2>
+  <p>The AI Commons is hosted on <strong>GitHub Pages</strong> under the Lewis University Library organization. Resource metadata is stored in a structured JSON file, and the gallery interface is a single-page HTML application with no dependencies beyond Google Fonts. The entire platform is designed to be maintainable by library staff with minimal technical overhead.</p>
+  <p>Contributions are cataloged with structured metadata including discipline tags, AI tools used, Bloom's taxonomy alignment, scope (university-wide, college, department, or interdisciplinary), contributor attribution, and links to both live resources and source repositories.</p>
+
+  <h2>Contact &amp; Questions</h2>
+  <p>Have a question about the AI Commons, want to contribute a resource, or interested in learning more about AI integration at Lewis University? Reach out to us through <a href="https://lewisu.libanswers.com/chat/widget/9834cecf0f3b65300e275b111a06f48909feee517a3cfe2daedf5b9229fe58cc" target="_blank" rel="noopener">LibChat</a> or visit the <a href="https://lewisuniversity.libguides.com" target="_blank" rel="noopener">Lewis University Library</a> website.</p>
+</div>
+
+<footer>
+  <p><a href="https://lewisuniversity.libguides.com" target="_blank" rel="noopener">Lewis University Library</a> &middot; AI Commons</p>
+  <p class="lasallian">In the Lasallian tradition of innovation in teaching and learning: together and by association.</p>
+  <p style="margin-top:.5rem">&copy; 2026 Lewis University Library. Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</p>
+</footer>
+</body>
+</html>

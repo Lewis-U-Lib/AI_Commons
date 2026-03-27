@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lewis University Library AI Commons</title>
+<meta name="description" content="A cross-campus hub for AI resources — applications, governance documents, teaching materials, policies, and interdisciplinary projects — created by the Lewis University community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FDFAF5;--paper:#F7F2EB;--paperDk:#EDE7DD;
+  --ink:#1E1E1E;--inkSoft:#4A4540;--inkMuted:#8C8580;--inkFaint:#B8B2AA;
+  --wine:#940731;--wineLt:#B80D42;--winePale:rgba(148,7,49,.06);--wineBg:rgba(148,7,49,.08);
+  --terra:#C4654A;--terraLt:#D8806A;--terraPale:rgba(196,101,74,.06);
+  --gold:#B8941F;--goldPale:rgba(184,148,31,.08);
+  --white:#FFFFFF;
+  --radius:8px;--radiusSm:5px;--radiusLg:14px;
+  --catApp:#6D28D9;--catLesson:#D97706;--catPolicy:#2563EB;
+  --catGov:#C4654A;--catPrompt:#059669;--catRubric:#DB2777;
+  --catWorkflow:#4F46E5;--catFramework:#0D9488;--catGuide:#EA580C;
+  --catInterdisc:#B8941F;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream);min-height:100vh;overflow-x:hidden;font-size:15px;line-height:1.6}
+a{color:var(--wine);text-decoration:none;transition:color .2s}
+a:hover{color:var(--terra)}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='.5' fill='%23C8C0B4' fill-opacity='.25'/%3E%3C/svg%3E")}
+
+/* ═══ TOP BAR ═══ */
+.topbar{position:fixed;top:0;left:0;right:0;height:3px;z-index:999;background:linear-gradient(90deg,var(--wine),var(--terra),var(--gold),var(--terra),var(--wine))}
+
+/* ═══ HEADER ═══ */
+.site-header{position:sticky;top:3px;z-index:100;background:rgba(253,250,245,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--paperDk);padding:.75rem 2.5rem;display:flex;align-items:center;justify-content:space-between}
+.site-brand{display:flex;align-items:center;gap:.85rem}
+.site-brand__icon{width:36px;height:36px;border-radius:50%;background:var(--wine);display:flex;align-items:center;justify-content:center;color:var(--cream);font-size:.9rem;font-weight:700;font-family:'Playfair Display',serif;letter-spacing:-.5px;box-shadow:0 2px 8px rgba(148,7,49,.2)}
+.site-brand__text{line-height:1.15}
+.site-brand__library{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--wine)}
+.site-brand__commons{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--ink);letter-spacing:.2px}
+.site-nav{display:flex;gap:1.75rem}
+.site-nav a{font-size:.82rem;font-weight:500;color:var(--inkMuted);letter-spacing:.3px;position:relative}
+.site-nav a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1.5px;background:var(--terra);transform:scaleX(0);transition:transform .25s}
+.site-nav a:hover{color:var(--ink)}
+.site-nav a:hover::after{transform:scaleX(1)}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;padding:5rem 2.5rem 4rem;text-align:center;background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%);overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--paperDk),transparent)}
+.constellation{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.3}
+.hero>*:not(.constellation){position:relative;z-index:1}
+.hero__institution{font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--wine);margin-bottom:1.25rem}
+.hero h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(2.2rem,5.5vw,3.8rem);line-height:1.1;color:var(--ink);margin-bottom:.75rem}
+.hero h1 em{font-style:italic;font-weight:600;color:var(--terra)}
+.hero__rule{width:60px;height:2px;margin:1.25rem auto;background:linear-gradient(90deg,var(--wine),var(--terra));border:none}
+.hero__sub{max-width:660px;margin:0 auto 1.5rem;font-size:1rem;line-height:1.75;color:var(--inkSoft);font-weight:400}
+.hero__sub strong{color:var(--ink);font-weight:600}
+.hero__philosophy{max-width:580px;margin:0 auto 2.5rem;font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:var(--inkMuted);line-height:1.7;border-left:2px solid var(--terra);padding-left:1.2rem;text-align:left}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding-top:.5rem}
+.hero-stat{text-align:center}
+.hero-stat__num{font-family:'Playfair Display',serif;font-weight:700;font-size:2rem;color:var(--wine)}
+.hero-stat__label{font-size:.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--inkMuted);font-weight:500;margin-top:.1rem}
+
+/* ═══ CONVERGENCE BANNER ═══ */
+.cross-banner{background:var(--white);border-top:1px solid var(--paperDk);border-bottom:1px solid var(--paperDk);padding:2.5rem 2.5rem;text-align:center}
+.cross-banner h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:var(--ink);margin-bottom:.75rem}
+.cross-banner p{max-width:700px;margin:0 auto;font-size:.92rem;line-height:1.75;color:var(--inkSoft)}
+.cross-banner .hl{color:var(--wine);font-weight:600}
+
+/* ═══ CATEGORIES ═══ */
+.categories{padding:3rem 2.5rem 1rem;max-width:1200px;margin:0 auto}
+.sec-title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;text-align:center;color:var(--ink);margin-bottom:1.75rem}
+.sec-title::after{content:'';display:block;width:40px;height:2px;margin:.6rem auto 0;background:linear-gradient(90deg,var(--wine),var(--terra))}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.75rem}
+.cat-card{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radius);padding:1rem .75rem;text-align:center;cursor:pointer;transition:all .25s}
+.cat-card:hover{border-color:var(--wine);box-shadow:0 4px 20px rgba(148,7,49,.08);transform:translateY(-2px)}
+.cat-card .cat-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;font-size:1.15rem;background:var(--paper);border:1.5px solid var(--paperDk);transition:all .25s}
+.cat-card:hover .cat-icon{border-color:var(--wine);background:var(--winePale)}
+.cat-card .cat-name{font-family:'DM Sans',sans-serif;font-weight:600;font-size:.78rem;color:var(--ink);margin-bottom:.15rem}
+.cat-card .cat-count{font-size:.7rem;color:var(--inkMuted)}
+
+/* ═══ PILLS ═══ */
+.pill-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;padding:1.5rem 2.5rem .75rem;max-width:1200px;margin:0 auto}
+.pill{background:transparent;border:1px solid var(--paperDk);border-radius:20px;padding:.35rem .9rem;font-size:.75rem;font-weight:500;color:var(--inkMuted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.pill:hover{border-color:var(--wine);color:var(--wine)}
+.pill.active{background:var(--wine);border-color:var(--wine);color:var(--cream)}
+
+/* ═══ FILTERS ═══ */
+.filter-bar{display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;padding:.75rem 2.5rem;max-width:1200px;margin:0 auto}
+.search-box{flex:1;min-width:220px;position:relative}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--inkFaint);fill:none;stroke-width:2}
+.search-box input{width:100%;background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusSm);padding:.55rem .75rem .55rem 34px;color:var(--ink);font-size:.85rem;font-family:'DM Sans',sans-serif;transition:border-color .2s}
+.search-box input:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 3px var(--winePale)}
+.search-box input::placeholder{color:var(--inkFaint)}
+.fsel{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusSm);padding:.55rem .75rem;color:var(--inkSoft);font-size:.82rem;font-family:'DM Sans',sans-serif;cursor:pointer;min-width:145px;transition:border-color .2s}
+.fsel:focus{outline:none;border-color:var(--wine)}
+.result-count{font-size:.78rem;color:var(--inkMuted);margin-left:auto;white-space:nowrap}
+
+/* ═══ BADGES ═══ */
+.badge-x{display:inline-flex;align-items:center;gap:.25rem;background:var(--goldPale);border:1px solid rgba(184,148,31,.2);border-radius:10px;padding:.12rem .55rem;font-size:.62rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+.badge-x svg{width:9px;height:9px;fill:currentColor}
+
+/* ═══ CARD GRID ═══ */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.1rem;padding:1.25rem 2.5rem 3rem;max-width:1200px;margin:0 auto}
+.card{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusLg);overflow:hidden;display:flex;flex-direction:column;transition:all .3s}
+.card:hover{border-color:rgba(148,7,49,.2);box-shadow:0 8px 30px rgba(30,30,30,.06),0 2px 8px rgba(148,7,49,.04);transform:translateY(-3px)}
+.card__ribbon{height:3px;width:100%}
+.card__body{padding:1.25rem 1.25rem .75rem;flex:1;display:flex;flex-direction:column}
+.card__cat{display:inline-flex;align-items:center;gap:.3rem;font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:.5rem}
+.card__cat .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.card__title{font-family:'Playfair Display',serif;font-weight:700;font-size:1.08rem;color:var(--ink);margin-bottom:.45rem;line-height:1.3}
+.card__desc{font-size:.84rem;color:var(--inkSoft);line-height:1.65;margin-bottom:.7rem;flex:1}
+.card__disciplines{display:flex;flex-wrap:wrap;gap:.25rem;margin-bottom:.5rem}
+.disc-tag{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:.1rem .4rem;border-radius:6px;background:var(--terraPale);color:var(--terra);border:1px solid rgba(196,101,74,.12)}
+.card__meta{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.65rem}
+.chip{display:inline-block;font-size:.63rem;font-weight:500;padding:.12rem .45rem;border-radius:8px;background:var(--paper);color:var(--inkMuted)}
+.chip--disc{color:var(--terra);background:var(--terraPale)}
+.chip--tool{color:var(--wine);background:var(--winePale)}
+.chip--scope{color:var(--gold);background:var(--goldPale)}
+.card__contributor{font-size:.76rem;color:var(--inkMuted);display:flex;align-items:center;gap:.35rem;margin-bottom:.5rem}
+.card__contributor svg{width:11px;height:11px;fill:currentColor;opacity:.5}
+.card__ft{display:flex;gap:.5rem;padding:.7rem 1.25rem;border-top:1px solid var(--paperDk);background:var(--paper)}
+.btn-launch,.btn-source{flex:1;text-align:center;padding:.45rem;border-radius:var(--radiusSm);font-size:.76rem;font-weight:600;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.5px;transition:all .2s;text-decoration:none}
+.btn-launch{background:var(--wine);color:var(--cream)}
+.btn-launch:hover{background:var(--wineLt);color:var(--cream)}
+.btn-source{background:var(--white);color:var(--inkMuted);border:1px solid var(--paperDk)}
+.btn-source:hover{border-color:var(--terra);color:var(--terra)}
+
+/* ═══ ACCORDION — Network Effect ═══ */
+.accordion{max-width:1000px;margin:2rem auto 1rem;padding:0 2.5rem}
+.accordion__trigger{
+  width:100%;background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusLg);
+  padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;
+  color:var(--ink);transition:all .25s;
+}
+.accordion__trigger:hover{border-color:var(--wine);box-shadow:0 2px 12px rgba(148,7,49,.06)}
+.accordion__trigger .arr{transition:transform .3s;font-size:.85rem;color:var(--wine)}
+.accordion__trigger.open .arr{transform:rotate(180deg)}
+.accordion__body{
+  max-height:0;overflow:hidden;transition:max-height .4s ease;
+}
+.accordion__body.open{max-height:2000px}
+.accordion__inner{padding:1rem 0}
+.conn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.75rem}
+.conn-card{background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radius);padding:1.1rem;text-align:left;transition:all .25s}
+.conn-card:hover{border-color:var(--wine);box-shadow:0 4px 16px rgba(148,7,49,.05);transform:translateY(-1px)}
+.conn-card h3{font-family:'Playfair Display',serif;font-weight:600;font-size:.9rem;color:var(--wine);margin-bottom:.35rem}
+.conn-card p{font-size:.82rem;color:var(--inkSoft);line-height:1.6}
+.accordion__more{text-align:center;margin-top:.75rem}
+.accordion__more a{font-size:.82rem;font-weight:600;color:var(--wine);text-decoration:none;border-bottom:1px dashed var(--wine);padding-bottom:1px}
+.accordion__more a:hover{color:var(--terra);border-color:var(--terra)}
+
+/* ═══ FAB ═══ */
+.fab-container{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem}
+.fab-menu{
+  display:flex;flex-direction:column;gap:.4rem;
+  opacity:0;transform:translateY(10px) scale(.95);pointer-events:none;
+  transition:all .25s ease;
+}
+.fab-menu.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.fab-menu a{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--white);border:1px solid var(--paperDk);border-radius:var(--radiusLg);
+  padding:.65rem 1.1rem;font-size:.82rem;font-weight:600;color:var(--ink);
+  box-shadow:0 4px 20px rgba(30,30,30,.1);transition:all .2s;white-space:nowrap;
+  text-decoration:none;font-family:'DM Sans',sans-serif;
+}
+.fab-menu a:hover{border-color:var(--wine);color:var(--wine);box-shadow:0 6px 24px rgba(148,7,49,.12)}
+.fab-menu a .fab-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.fab-btn{
+  width:auto;padding:.75rem 1.25rem;border-radius:28px;border:none;
+  background:var(--wine);color:var(--cream);cursor:pointer;
+  box-shadow:0 4px 20px rgba(148,7,49,.25);transition:all .3s;
+  font-family:'Playfair Display',serif;font-weight:600;font-size:.88rem;
+  display:flex;align-items:center;gap:.5rem;letter-spacing:.3px;
+}
+.fab-btn:hover{background:var(--wineLt);box-shadow:0 6px 28px rgba(148,7,49,.3);transform:translateY(-1px)}
+.fab-btn .fab-x{display:none;font-family:'DM Sans',sans-serif;font-weight:400}
+.fab-btn.open .fab-label{display:none}
+.fab-btn.open .fab-x{display:inline}
+.fab-btn svg{width:16px;height:16px;fill:currentColor;transition:transform .3s}
+.fab-btn.open svg{transform:rotate(45deg)}
+
+/* ═══ FOOTER ═══ */
+footer{text-align:center;padding:2.5rem 2.5rem;border-top:1px solid var(--paperDk);background:var(--paper);color:var(--inkMuted);font-size:.76rem}
+footer a{color:var(--wine)}
+footer .cc-row{display:flex;justify-content:center;gap:.6rem;margin-top:.65rem}
+.cc-badge{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--wine);display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:700;color:var(--wine);transition:all .2s}
+.cc-badge:hover{background:var(--wine);color:var(--cream)}
+footer .lasallian{font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;color:var(--inkMuted);margin-top:.5rem}
+
+/* ═══ EMPTY ═══ */
+.empty-state{grid-column:1/-1;text-align:center;padding:4rem 2rem}
+.empty-state h3{font-family:'Playfair Display',serif;font-weight:600;font-size:1.1rem;color:var(--inkSoft);margin-bottom:.4rem}
+.empty-state p{font-size:.85rem;color:var(--inkMuted)}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeUp .4s ease both}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}.card:nth-child(6){animation-delay:.25s}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){.hero{padding:3.5rem 1.25rem 3rem}.hero-stats{gap:1.5rem}.cat-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}.filter-bar{flex-direction:column}.fsel{width:100%}.grid{grid-template-columns:1fr;padding:1rem}.site-header{padding:.5rem 1rem}.site-nav{gap:.75rem}.conn-grid{grid-template-columns:1fr}.pill-bar{padding:1rem 1.25rem .5rem}.accordion{padding:0 1rem}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+<header class="site-header">
+  <div class="site-brand">
+    <div class="site-brand__icon">LU</div>
+    <div class="site-brand__text">
+      <div class="site-brand__library">Lewis University Library</div>
+      <div class="site-brand__commons">AI Commons</div>
+    </div>
+  </div>
+  <nav class="site-nav">
+    <a href="#gallery">Browse</a>
+    <a href="#network">Connections</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <svg class="constellation" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" id="constellation-svg"></svg>
+  <div class="hero__institution">Lewis University Library</div>
+  <h1>The <em>AI</em> Commons</h1>
+  <hr class="hero__rule">
+  <p class="hero__sub">A living, cross-campus collection of <strong>AI-generated tools, governance frameworks, teaching resources, departmental policies, and interdisciplinary projects</strong> from every college, department, and office at Lewis University.</p>
+  <p class="hero__philosophy">When a nursing simulation inspires a physics visualization&mdash;when an aviation safety decoder shapes a criminal justice case analyzer&mdash;when a university AI policy sparks departmental dialogue in six colleges simultaneously&mdash;that&rsquo;s the Commons at work. Not a repository. A culture.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat__num" id="stat-resources">&mdash;</div><div class="hero-stat__label">Resources</div></div>
+    <div class="hero-stat"><div class="hero-stat__num" id="stat-categories">&mdash;</div><div class="hero-stat__label">Categories</div></div>
+    <div class="hero-stat"><div class="hero-stat__num" id="stat-disciplines">&mdash;</div><div class="hero-stat__label">Disciplines</div></div>
+    <div class="hero-stat"><div class="hero-stat__num" id="stat-contributors">&mdash;</div><div class="hero-stat__label">Contributors</div></div>
+    <div class="hero-stat"><div class="hero-stat__num" id="stat-crossdisc">&mdash;</div><div class="hero-stat__label">Interdisciplinary</div></div>
+  </div>
+</section>
+
+<section class="cross-banner">
+  <h2>Where Disciplines Converge</h2>
+  <p>The AI Commons isn&rsquo;t organized by silos&mdash;it&rsquo;s organized by <span class="hl">resonance</span>. A computer science student&rsquo;s prompt library lives alongside a theology professor&rsquo;s ethical framework. The <span class="hl">interdisciplinary resources</span> here exist in multiple homes at once, because that&rsquo;s how knowledge actually works.</p>
+</section>
+
+<section class="categories" id="gallery">
+  <h2 class="sec-title">Explore by Category</h2>
+  <div class="cat-grid" id="cat-grid"></div>
+</section>
+
+<div class="pill-bar" id="pill-bar"><button class="pill active" data-cat="">All Resources</button></div>
+<div class="filter-bar">
+  <div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="search" placeholder="Search resources, authors, disciplines, tags..."></div>
+  <select class="fsel" id="filter-discipline"><option value="">All disciplines</option></select>
+  <select class="fsel" id="filter-scope"><option value="">All scopes</option></select>
+  <select class="fsel" id="filter-tool"><option value="">All AI tools</option></select>
+  <div class="result-count" id="result-count"></div>
+</div>
+
+<main class="grid" id="project-grid"></main>
+
+<!-- ═══ NETWORK EFFECT ACCORDION ═══ -->
+<div class="accordion" id="network">
+  <button class="accordion__trigger" id="acc-trigger" aria-expanded="false" aria-controls="acc-body">
+    <span>The Network Effect &mdash; How Cross-Campus Dialogue Materializes</span>
+    <span class="arr">&#9660;</span>
+  </button>
+  <div class="accordion__body" id="acc-body" role="region">
+    <div class="accordion__inner">
+      <div class="conn-grid">
+        <div class="conn-card"><h3>Lateral Inspiration</h3><p>A biology professor&rsquo;s AI-generated lab safety protocol becomes the template for a chemistry department&rsquo;s hazard system. Neither planned it. The Commons made it visible.</p></div>
+        <div class="conn-card"><h3>Policy Cascade</h3><p>The university&rsquo;s AI Use Policy ripples outward&mdash;each college adapts it, each department interprets it. The Commons captures the entire cascade.</p></div>
+        <div class="conn-card"><h3>Cross-Pollination</h3><p>An interdisciplinary AI Ethics course draws case studies from nursing, business, aviation, and criminal justice&mdash;all living in the Commons.</p></div>
+        <div class="conn-card"><h3>Governance Transparency</h3><p>When every AI policy lives in one discoverable place, governance stops being a black box. Faculty can see the full landscape.</p></div>
+        <div class="conn-card"><h3>Student Benefit</h3><p>Students in any program can see how AI is used responsibly across the entire university. A living syllabus of institutional AI literacy.</p></div>
+        <div class="conn-card"><h3>Institutional Memory</h3><p>Faculty leave. Grants end. The Commons preserves the intellectual labor so nothing disappears into someone&rsquo;s hard drive.</p></div>
+      </div>
+      <div class="accordion__more">
+        <a href="network-effect.html">Read the full research brief with scholarly sources &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><a href="https://lewisuniversity.libguides.com" target="_blank" rel="noopener">Lewis University Library</a> &middot; AI Commons</p>
+  <p class="lasallian">In the Lasallian tradition of innovation in teaching and learning: together and by association.</p>
+  <div class="cc-row">
+    <span class="cc-badge" title="Creative Commons">CC</span>
+    <span class="cc-badge" title="Attribution">BY</span>
+    <span class="cc-badge" title="NonCommercial">NC</span>
+    <span class="cc-badge" title="ShareAlike">SA</span>
+  </div>
+  <p style="margin-top:.5rem">&copy; 2026 Lewis University Library. Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</p>
+</footer>
+
+<!-- ═══ FAB ═══ -->
+<div class="fab-container">
+  <div class="fab-menu" id="fab-menu">
+    <a href="about.html"><span class="fab-icon">📖</span> About the AI Commons</a>
+    <a href="network-effect.html"><span class="fab-icon">🌐</span> The Network Effect</a>
+    <a href="https://lewisu.libanswers.com/chat/widget/9834cecf0f3b65300e275b111a06f48909feee517a3cfe2daedf5b9229fe58cc" target="_blank" rel="noopener"><span class="fab-icon">💬</span> Ask Us</a>
+  </div>
+  <button class="fab-btn" id="fab-btn" aria-label="About the AI Commons">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    <span class="fab-label">About the AI Commons</span>
+    <span class="fab-x">Close</span>
+  </button>
+</div>
+
+<script>
+var CATEGORIES={},PROJECTS=[];
+(function(){
+  fetch('projects.json')
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
+    .then(function(d){CATEGORIES=d.categories||{};PROJECTS=d.projects||[];init()})
+    .catch(function(){document.getElementById('project-grid').innerHTML='<div class="empty-state"><h3>Could not load resource data</h3><p>Check that <code>projects.json</code> is in the same directory.</p></div>'});
+})();
+function init(){buildConstellation();populateStats();buildCatGrid();buildPills();populateFilters();renderGrid();bindEvents()}
+function buildConstellation(){var s=document.getElementById('constellation-svg');if(!s)return;var n=[];for(var i=0;i<30;i++)n.push({x:Math.random()*1200,y:Math.random()*500,r:Math.random()*2+1});var l='',d='';for(var a=0;a<n.length;a++){d+='<circle cx="'+n[a].x+'" cy="'+n[a].y+'" r="'+n[a].r+'" fill="rgba(148,7,49,.3)"/>';for(var b=a+1;b<n.length;b++){var dist=Math.hypot(n[a].x-n[b].x,n[a].y-n[b].y);if(dist<160){var o=(1-dist/160)*.1;l+='<line x1="'+n[a].x+'" y1="'+n[a].y+'" x2="'+n[b].x+'" y2="'+n[b].y+'" stroke="rgba(148,7,49,'+o+')" stroke-width="0.5"/>'}}}s.innerHTML=l+d}
+function populateStats(){document.getElementById('stat-resources').textContent=PROJECTS.length;var c={};PROJECTS.forEach(function(p){c[p.category]=1});document.getElementById('stat-categories').textContent=Object.keys(c).length;var ds={};PROJECTS.forEach(function(p){p.disciplines.forEach(function(d){if(d!=='All Disciplines')ds[d]=1})});document.getElementById('stat-disciplines').textContent=Object.keys(ds).length;var ct={};PROJECTS.forEach(function(p){ct[p.contributor]=1});document.getElementById('stat-contributors').textContent=Object.keys(ct).length;document.getElementById('stat-crossdisc').textContent=PROJECTS.filter(function(p){return p.interdisciplinary}).length}
+function buildCatGrid(){var g=document.getElementById('cat-grid'),cn={};PROJECTS.forEach(function(p){cn[p.category]=(cn[p.category]||0)+1});var h='';Object.keys(CATEGORIES).forEach(function(cat){var c=CATEGORIES[cat];if(!cn[cat])return;h+='<div class="cat-card" data-cat="'+esc(cat)+'" tabindex="0"><div class="cat-icon">'+c.icon+'</div><div class="cat-name">'+esc(cat)+'</div><div class="cat-count">'+cn[cat]+' resource'+(cn[cat]!==1?'s':'')+'</div></div>'});g.innerHTML=h;g.querySelectorAll('.cat-card').forEach(function(el){el.addEventListener('click',function(){var cat=this.getAttribute('data-cat');document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('active')});var t=document.querySelector('.pill[data-cat="'+cat+'"]');if(t)t.classList.add('active');activeCat=cat;renderGrid();document.getElementById('pill-bar').scrollIntoView({behavior:'smooth',block:'start'})})})}
+function buildPills(){var b=document.getElementById('pill-bar'),c={};PROJECTS.forEach(function(p){c[p.category]=1});var h='<button class="pill active" data-cat="">All Resources</button>';Object.keys(CATEGORIES).forEach(function(cat){if(!c[cat])return;h+='<button class="pill" data-cat="'+esc(cat)+'">'+cat+'</button>'});b.innerHTML=h;b.querySelectorAll('.pill').forEach(function(btn){btn.addEventListener('click',function(){b.querySelectorAll('.pill').forEach(function(x){x.classList.remove('active')});this.classList.add('active');activeCat=this.getAttribute('data-cat');renderGrid()})})}
+function populateFilters(){var ds={},sc={},tl={};PROJECTS.forEach(function(p){p.disciplines.forEach(function(d){ds[d]=1});if(p.scope)sc[p.scope]=1;p.tools.forEach(function(t){tl[t]=1})});fillSel('filter-discipline',Object.keys(ds).sort(),'All disciplines');fillSel('filter-scope',Object.keys(sc).sort(),'All scopes');fillSel('filter-tool',Object.keys(tl).sort(),'All AI tools')}
+function fillSel(id,items,label){var s=document.getElementById(id);s.innerHTML='<option value="">'+label+'</option>';items.forEach(function(v){s.innerHTML+='<option value="'+esc(v)+'">'+esc(v)+'</option>'})}
+var activeCat='';
+function renderGrid(){var q=document.getElementById('search').value.toLowerCase().trim(),disc=document.getElementById('filter-discipline').value,scope=document.getElementById('filter-scope').value,tool=document.getElementById('filter-tool').value;var f=PROJECTS.filter(function(p){if(activeCat&&p.category!==activeCat)return false;if(disc&&p.disciplines.indexOf(disc)===-1)return false;if(scope&&p.scope!==scope)return false;if(tool&&p.tools.indexOf(tool)===-1)return false;if(q){var blob=(p.title+' '+p.description+' '+p.disciplines.join(' ')+' '+p.tools.join(' ')+' '+p.contributor+' '+p.category+' '+(p.scope||'')).toLowerCase();return blob.indexOf(q)!==-1}return true});var g=document.getElementById('project-grid');if(f.length===0){g.innerHTML='<div class="empty-state"><h3>No resources match your filters</h3><p>Try broadening your search or clearing a filter.</p></div>'}else{g.innerHTML=f.map(buildCard).join('')}document.getElementById('result-count').textContent=f.length+' of '+PROJECTS.length+' resources'}
+function buildCard(p){var c=CATEGORIES[p.category]||{icon:'📄',color:'#888'},al=(p.category==='Interactive Application')?'Launch App':(p.category.indexOf('Policy')>-1)?'View Policy':'View Resource';var dh='';if(p.disciplines.length>1&&p.disciplines[0]!=='All Disciplines'){dh='<div class="card__disciplines">'+p.disciplines.map(function(d){return'<span class="disc-tag">'+esc(d)+'</span>'}).join('')+'</div>'}var xb=p.interdisciplinary?'<span class="badge-x"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8 5v6" stroke="currentColor" stroke-width="1.5"/></svg> Interdisciplinary</span>':'';return'<article class="card"><div class="card__ribbon" style="background:'+c.color+'"></div><div class="card__body"><div class="card__cat" style="color:'+c.color+'"><span class="dot" style="background:'+c.color+'"></span>'+esc(p.category)+' '+xb+'</div><h3 class="card__title">'+esc(p.title)+'</h3><p class="card__desc">'+esc(p.description)+'</p>'+dh+'<div class="card__meta">'+(p.disciplines[0]==='All Disciplines'?'<span class="chip chip--disc">All Disciplines</span>':(p.disciplines.length<=2?p.disciplines.map(function(d){return'<span class="chip chip--disc">'+esc(d)+'</span>'}).join(''):'<span class="chip chip--disc">'+p.disciplines.length+' Disciplines</span>'))+(p.scope?'<span class="chip chip--scope">'+esc(p.scope)+'</span>':'')+p.tools.map(function(t){return'<span class="chip chip--tool">'+esc(t)+'</span>'}).join('')+'</div><div class="card__contributor"><svg viewBox="0 0 16 16"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm-5 8a5 5 0 0110 0H3z"/></svg>'+esc(p.contributor)+'</div></div><div class="card__ft"><a href="'+esc(p.live_url)+'" target="_blank" rel="noopener" class="btn-launch">'+al+'</a><a href="'+esc(p.source_url)+'" target="_blank" rel="noopener" class="btn-source">Source</a></div></article>'}
+function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function bindEvents(){document.getElementById('search').addEventListener('input',renderGrid);document.getElementById('filter-discipline').addEventListener('change',renderGrid);document.getElementById('filter-scope').addEventListener('change',renderGrid);document.getElementById('filter-tool').addEventListener('change',renderGrid)}
+
+/* ═══ Accordion & FAB — wired immediately, no JSON dependency ═══ */
+document.getElementById('acc-trigger').addEventListener('click',function(){
+  var b=document.getElementById('acc-body');
+  var open=b.classList.toggle('open');
+  this.classList.toggle('open');
+  this.setAttribute('aria-expanded',open);
+});
+document.getElementById('fab-btn').addEventListener('click',function(){
+  var m=document.getElementById('fab-menu');
+  m.classList.toggle('open');
+  this.classList.toggle('open');
+});
+</script>
+</body>
+</html>
